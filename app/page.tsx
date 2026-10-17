@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, ChevronDown, Compass, Globe2, Heart, Menu, Rocket, Sparkles, Users, X, Zap } from 'lucide-react'
 import Link from 'next/link'
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 const navItems = ['Startups', 'Co-Founders', 'Community', 'Hackathons']
 const features = [
@@ -84,7 +84,6 @@ const candidates = [
 
 export default function Page() {
   const [openFaq, setOpenFaq] = useState(0)
-  const [builderCount, setBuilderCount] = useState(1200)
   const [candidateIndex, setCandidateIndex] = useState(0)
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right'>('right')
   const [connected, setConnected] = useState(false)
@@ -111,16 +110,10 @@ export default function Page() {
     }, 380)
   }
 
-  useEffect(() => {
-    fetch('/api/waitlist')
-      .then((r) => r.json())
-      .then((d) => { if (typeof d?.count === 'number') setBuilderCount(d.count) })
-      .catch(() => {})
-  }, [])
   return <main className="min-h-screen overflow-hidden bg-space text-ink">
     <div className="aurora" aria-hidden="true" /><div className="noise" aria-hidden="true" />
     <header className="sticky top-4 z-30 mx-auto flex w-[calc(100%-2rem)] max-w-6xl items-center justify-between rounded-full border border-white/10 bg-space/70 px-3 py-2 shadow-2xl backdrop-blur-xl sm:px-5">
-      <Link href="#top" aria-label="Mirai home"><Logo /></Link>
+      <div className="flex items-center gap-3"><Link href="#top" aria-label="Mirai home"><Logo /></Link><span className="hidden h-7 w-px bg-ink/15 sm:block" /><span className="hidden text-xs text-ink/45 sm:block">by <a href="https://ofbrain.site/" target="_blank" rel="noopener noreferrer" aria-label="Visit ofbrain website">ofbrain</a></span></div>
       <nav className="hidden items-center gap-7 lg:flex">{navItems.map((item) => <a key={item} href={`#${item.toLowerCase().replace('-', '')}`} className="text-sm text-ink/60 transition hover:text-ink">{item}</a>)}</nav>
       <a href="#waitlist" className="glass-button hidden !px-5 !py-2.5 sm:flex">Join waitlist</a><button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="glass-icon sm:hidden" aria-label="Open navigation"><Menu /></button>
     </header>
@@ -134,8 +127,8 @@ export default function Page() {
     )}
 
     <section id="top" className="relative mx-auto grid max-w-6xl gap-14 px-5 pb-24 pt-24 sm:px-8 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:pb-36 lg:pt-32">
-      <div><motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }} className="mb-7 flex items-center gap-3"><span className="status-dot" /> <span className="eyebrow">The builder community, reimagined</span></motion.div><motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .1, duration: .8 }} className="max-w-3xl text-6xl leading-[.98] tracking-[-.045em] sm:text-8xl">Build the <span className="gradient-text italic">future.</span><br />Together.</motion.h1><motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2, duration: .8 }} className="mt-7 max-w-xl text-lg leading-relaxed text-ink/65 sm:text-xl">A home for bold ideas, curious builders, and the people you haven&apos;t met yet. Find your co-founder, get discovered, and make your next move.</motion.p><motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .3, duration: .8 }} className="mt-9 max-w-xl"><WaitlistForm /><p className="mt-4 flex items-center gap-2 text-sm text-ink/45"><span className="flex -space-x-2"><span className="avatar bg-violet">A</span><span className="avatar bg-blue">K</span><span className="avatar bg-mint text-space">R</span></span> Join {builderCount.toLocaleString()}+ builders shaping what&apos;s next</p></motion.div></div>
-      <motion.div initial={{ opacity: 0, scale: .94, rotate: 2 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ delay: .25, duration: 1 }} className="relative mx-auto w-full max-w-md"><div className="hero-orbit" /><div className="glass-strong relative rounded-[2rem] p-6 sm:p-8"><Logo className="mb-10 w-fit" /><div className="flex items-end justify-between"><div><p className="eyebrow">Your next chapter</p><p className="mt-3 text-4xl tracking-tight">Starts here<span className="text-blue">.</span></p></div><Sparkles className="mb-1 text-sky" /></div><div className="mt-10 flex items-center justify-between border-t border-white/10 pt-5"><span className="text-sm text-ink/45">Ideas in motion</span><span className="text-sm text-mint">+ 24% this week</span></div></div><div className="glass absolute -bottom-5 -left-5 rounded-2xl p-4 shadow-xl"><div className="flex items-center gap-3"><div className="grid size-9 place-items-center rounded-full bg-mint text-space"><Heart /></div><div><p className="text-sm">New connection</p><p className="text-xs text-ink/45">You have things in common</p></div></div></div></motion.div>
+      <div><motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }} className="mb-7 flex items-center gap-3"><span className="status-dot" /> <span className="eyebrow">The builder community, reimagined</span></motion.div><motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .1, duration: .8 }} className="max-w-3xl text-6xl leading-[.98] tracking-[-.045em] sm:text-8xl">Build the <span className="gradient-text italic">future.</span><br />Together.</motion.h1><motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2, duration: .8 }} className="mt-7 max-w-xl text-lg leading-relaxed text-ink/65 sm:text-xl">A home for bold ideas, curious builders, and the people you haven&apos;t met yet. Find your co-founder, get discovered, and make your next move.</motion.p><motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .3, duration: .8 }} className="mt-9 max-w-xl"><WaitlistForm /><p className="mt-4 text-sm text-ink/45">A thoughtful space for founders, builders, and students.</p></motion.div></div>
+      <motion.div initial={{ opacity: 0, scale: .94, rotate: 2 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ delay: .25, duration: 1 }} className="relative mx-auto w-full max-w-md"><div className="hero-orbit" /><div className="glass-strong relative rounded-[2rem] p-6 sm:p-8"><Logo className="mb-10 w-fit" /><div className="flex items-end justify-between"><div><p className="eyebrow">Your next chapter</p><p className="mt-3 text-4xl tracking-tight">Starts here<span className="text-blue">.</span></p></div><Sparkles className="mb-1 text-sky" /></div><div className="mt-10 flex items-center justify-between border-t border-white/10 pt-5"><span className="text-sm text-ink/45">A place to begin</span><span className="text-sm text-ink/45">Built for what&apos;s next</span></div></div><div className="glass absolute -bottom-5 -left-5 rounded-2xl p-4 shadow-xl"><div className="flex items-center gap-3"><div className="grid size-9 place-items-center rounded-full bg-mint text-space"><Heart /></div><div><p className="text-sm">New connection</p><p className="text-xs text-ink/45">You have things in common</p></div></div></div></motion.div>
     </section>
 
     <section className="mx-auto max-w-6xl px-5 pb-28 sm:px-8"><div className="section-rule mb-14" /><div className="grid gap-5 sm:grid-cols-3"><div><p className="eyebrow">01 / Why Mirai</p><p className="mt-4 text-2xl leading-snug text-ink/85">The best things are built <span className="italic text-sky">together.</span></p></div><p className="text-ink/55 sm:col-span-2 sm:pl-8 sm:text-lg sm:leading-relaxed">Mirai brings your startup journey into one thoughtful space — from the first spark of an idea to the moment you find the people who make it real.</p></div></section>
@@ -153,7 +146,7 @@ export default function Page() {
     <section id="waitlist" className="mx-auto max-w-6xl px-5 pb-20 sm:px-8"><div className="relative overflow-hidden rounded-[2rem] border border-blue/30 bg-blue/10 p-7 text-center sm:p-14"><div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(123,97,255,.3),transparent_60%)]" /><div className="relative"><Logo className="mx-auto mb-8 w-fit" /><h2 className="mx-auto max-w-2xl text-4xl leading-tight sm:text-6xl">The future is a<br /><span className="gradient-text italic">team sport.</span></h2><p className="mx-auto mt-5 max-w-md text-ink/60">Be part of the first wave building what comes next.</p><div className="mx-auto mt-8 max-w-xl text-left"><WaitlistForm compact /></div></div></div></section>
 
     <footer className="mx-auto flex max-w-6xl flex-col gap-5 border-t border-white/10 px-5 py-8 text-sm text-ink/45 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-      <Logo />
+      <div className="flex items-center gap-3"><Logo /><span className="h-5 w-px bg-ink/15" /><span>by <a href="https://ofbrain.site/" target="_blank" rel="noopener noreferrer" aria-label="Visit ofbrain website">ofbrain</a></span></div>
       <div className="flex items-center gap-6">
         <Link href="/privacy" className="hover:text-ink transition">Privacy Policy</Link>
         <Link href="/terms" className="hover:text-ink transition">Terms of Service</Link>
