@@ -20,7 +20,7 @@ const faqs = [
 
 function Logo({ className = '', symbolOnly = false }: { className?: string; symbolOnly?: boolean }) {
   if (symbolOnly) return <span className={`logo-symbol ${className}`} aria-hidden="true"><img src="/mirai-symbol-white.png" alt="" /></span>
-  return <div className={`logo-chip ${className}`}><img src="/mirai-logo.png" alt="Mirai logo" className="h-32 w-auto object-contain" /></div>
+  return <div className={`logo-chip ${className}`}><img src="/ofbrain-logo.jpeg" alt="ofbrain logo" className="h-10 w-28 object-cover object-center" /></div>
 }
 
 function WaitlistForm({ compact = false }: { compact?: boolean }) {
