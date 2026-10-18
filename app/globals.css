@@ -24,6 +24,7 @@ button, input, select { font: inherit; }
 .glass-icon { display: inline-grid; place-items: center; border: 1px solid rgb(255 255 255 / .14); background: rgb(0 128 255 / .86); color: white; border-radius: 999px; padding: 13px; cursor: pointer; }
 .logo-chip { display: block; border: 0; border-radius: 0; background: transparent; padding: 0; }
 .logo-chip img { border-radius: 0; font-size: 30px; }
+.ofbrain-mark { display: block; object-fit: cover; object-position: center; border-radius: 0.35rem; mix-blend-mode: multiply; }
 .logo-symbol { display: inline-grid; width: 31px; height: 31px; overflow: hidden; flex: 0 0 31px; border-radius: 50%; background: var(--mirai); }
 .logo-symbol img { width: 31px; max-width: none; height: 31px; object-fit: contain; object-position: center; mix-blend-mode: screen; }
 .eyebrow { color: #245d78; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }

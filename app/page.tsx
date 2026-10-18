@@ -20,7 +20,11 @@ const faqs = [
 
 function Logo({ className = '', symbolOnly = false }: { className?: string; symbolOnly?: boolean }) {
   if (symbolOnly) return <span className={`logo-symbol ${className}`} aria-hidden="true"><img src="/mirai-symbol-white.png" alt="" /></span>
-  return <div className={`logo-chip ${className}`}><img src="/ofbrain-logo.jpeg" alt="ofbrain logo" className="h-10 w-28 object-cover object-center" /></div>
+  return <span className={`inline-flex items-center ${className}`}><img src="/mirai-logo.png" alt="Mirai" className="h-9 w-auto object-contain" /></span>
+}
+
+function OfbrainMark({ className = '' }: { className?: string }) {
+  return <img src="/ofbrain-logo.jpeg" alt="ofbrain" className={`ofbrain-mark ${className}`} />
 }
 
 function WaitlistForm({ compact = false }: { compact?: boolean }) {
@@ -113,7 +117,7 @@ export default function Page() {
   return <main className="min-h-screen overflow-hidden bg-space text-ink">
     <div className="aurora" aria-hidden="true" /><div className="noise" aria-hidden="true" />
     <header className="sticky top-4 z-30 mx-auto flex w-[calc(100%-2rem)] max-w-6xl items-center justify-between rounded-full border border-white/10 bg-space/70 px-3 py-2 shadow-2xl backdrop-blur-xl sm:px-5">
-      <div className="flex items-center gap-3"><Link href="#top" aria-label="Mirai home"><Logo /></Link><span className="hidden h-7 w-px bg-ink/15 sm:block" /><span className="hidden text-xs text-ink/45 sm:block">by <a href="https://ofbrain.site/" target="_blank" rel="noopener noreferrer" aria-label="Visit ofbrain website">ofbrain</a></span></div>
+      <div className="flex items-center gap-3"><Link href="#top" aria-label="Mirai home"><Logo /></Link><span className="hidden h-7 w-px bg-ink/15 sm:block" /><a href="https://ofbrain.site/" target="_blank" rel="noopener noreferrer" aria-label="Visit ofbrain website" className="hidden sm:block"><OfbrainMark className="h-7 w-20" /></a></div>
       <nav className="hidden items-center gap-7 lg:flex">{navItems.map((item) => <a key={item} href={`#${item.toLowerCase().replace('-', '')}`} className="text-sm text-ink/60 transition hover:text-ink">{item}</a>)}</nav>
       <a href="#waitlist" className="glass-button hidden !px-5 !py-2.5 sm:flex">Join waitlist</a><button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="glass-icon sm:hidden" aria-label="Open navigation"><Menu /></button>
     </header>
@@ -146,7 +150,7 @@ export default function Page() {
     <section id="waitlist" className="mx-auto max-w-6xl px-5 pb-20 sm:px-8"><div className="relative overflow-hidden rounded-[2rem] border border-blue/30 bg-blue/10 p-7 text-center sm:p-14"><div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(123,97,255,.3),transparent_60%)]" /><div className="relative"><Logo className="mx-auto mb-8 w-fit" /><h2 className="mx-auto max-w-2xl text-4xl leading-tight sm:text-6xl">The future is a<br /><span className="gradient-text italic">team sport.</span></h2><p className="mx-auto mt-5 max-w-md text-ink/60">Be part of the first wave building what comes next.</p><div className="mx-auto mt-8 max-w-xl text-left"><WaitlistForm compact /></div></div></div></section>
 
     <footer className="mx-auto flex max-w-6xl flex-col gap-5 border-t border-white/10 px-5 py-8 text-sm text-ink/45 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-      <div className="flex items-center gap-3"><Logo /><span className="h-5 w-px bg-ink/15" /><span>by <a href="https://ofbrain.site/" target="_blank" rel="noopener noreferrer" aria-label="Visit ofbrain website">ofbrain</a></span></div>
+      <div className="flex items-center gap-3"><Logo /><span className="h-5 w-px bg-ink/15" /><a href="https://ofbrain.site/" target="_blank" rel="noopener noreferrer" aria-label="Visit ofbrain website"><OfbrainMark className="h-8 w-24" /></a></div>
       <div className="flex items-center gap-6">
         <Link href="/privacy" className="hover:text-ink transition">Privacy Policy</Link>
         <Link href="/terms" className="hover:text-ink transition">Terms of Service</Link>
